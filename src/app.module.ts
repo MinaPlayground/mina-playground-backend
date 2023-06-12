@@ -1,10 +1,13 @@
 import { Module } from '@nestjs/common';
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
+import { MongooseModule } from '@nestjs/mongoose';
+import { FileTreeModule } from './filetree/filetree.module';
 
 @Module({
-  imports: [],
-  controllers: [AppController],
-  providers: [AppService],
+  imports: [
+    MongooseModule.forRoot(
+      'mongodb+srv://arnout:<password>@minaplayground.il3cad4.mongodb.net/?retryWrites=true&w=majority',
+    ),
+    FileTreeModule,
+  ],
 })
 export class AppModule {}
