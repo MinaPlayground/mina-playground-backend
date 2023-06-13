@@ -1,5 +1,7 @@
-import { DirectoryNode, FileNode } from '../../../types';
+import { FileSystemTree } from '../../../types';
+import { Types } from 'mongoose';
 
 export class CreateFileTreeDTO {
-  [name: string]: DirectoryNode | FileNode;
+  readonly fileSystemTree: FileSystemTree;
+  readonly project_id: Types.ObjectId;
 }
