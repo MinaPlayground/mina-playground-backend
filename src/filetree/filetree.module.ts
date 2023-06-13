@@ -12,5 +12,6 @@ import { FileTreeService } from './filetree.service';
   ],
   controllers: [FileTreeController],
   providers: [FileTreeService],
+  exports: [FileTreeService],
 })
 export class FileTreeModule {}

@@ -20,7 +20,7 @@ export class FileTreeService {
   }
 
   async findOne(id: string): Promise<FileTree> {
-    return this.fileTree.findOne({ _id: id }).exec();
+    return this.fileTree.findOne({ project_id: id }).exec();
   }
 
   async delete(id: string) {
