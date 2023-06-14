@@ -1,7 +1,16 @@
-import { Body, Controller, Delete, Get, Param, Post } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  Param,
+  Patch,
+  Post,
+} from '@nestjs/common';
 import { FileTree } from './schemas/filetree.schema';
 import { CreateFileTreeDTO } from './dto/create-filetree.dto';
 import { FileTreeService } from './filetree.service';
+import { UpdateFileTreeDTO } from './dto/update-filetree.dto';
 
 @Controller('fileTree')
 export class FileTreeController {
@@ -25,5 +34,13 @@ export class FileTreeController {
   @Delete(':id')
   async delete(@Param('id') id: string) {
     return this.fileTreeService.delete(id);
+  }
+
+  @Patch(':id')
+  async update(
+    @Param('id') id: string,
+    @Body() updateFileTreeDTO: UpdateFileTreeDTO,
+  ) {
+    return this.fileTreeService.update(id, updateFileTreeDTO);
   }
 }

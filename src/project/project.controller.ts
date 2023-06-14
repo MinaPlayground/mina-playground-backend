@@ -19,9 +19,42 @@ export class ProjectController {
       fileSystemTree: {
         test: {
           directory: {
-            'testFile.js': {
+            'testFile*js': {
               file: {
-                contents: 'testtesttest',
+                contents:
+                  'import { Field, SmartContract, state, State, method } from "snarkyjs";\n' +
+                  '// test\n' +
+                  'export class Add extends SmartContract {\n' +
+                  '  @state(Field) num = State<Field>();\n' +
+                  '\n' +
+                  '  init() {\n' +
+                  '    super.init();\n' +
+                  '    this.num.set(Field(1));\n' +
+                  '  }\n' +
+                  '\n' +
+                  '  @method update() {\n' +
+                  '    const currentState = this.num.getAndAssertEquals();\n' +
+                  '  }\n' +
+                  '}\n',
+              },
+            },
+            'testFile2*js': {
+              file: {
+                contents:
+                  'import { Field, SmartContract, state, State, method } from "snarkyjs";\n' +
+                  '// test\n' +
+                  'export class Add extends SmartContract {\n' +
+                  '  @state(Field) num = State<Field>();\n' +
+                  '\n' +
+                  '  init() {\n' +
+                  '    super.init();\n' +
+                  '    this.num.set(Field(1));\n' +
+                  '  }\n' +
+                  '\n' +
+                  '  @method update() {\n' +
+                  '    const currentState = this.num.getAndAssertEquals();\n' +
+                  '  }\n' +
+                  '}\n',
               },
             },
           },

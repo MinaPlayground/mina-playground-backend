@@ -3,6 +3,7 @@ import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { FileTree } from './schemas/filetree.schema';
 import { CreateFileTreeDTO } from './dto/create-filetree.dto';
+import { UpdateFileTreeDTO } from './dto/update-filetree.dto';
 
 @Injectable()
 export class FileTreeService {
@@ -28,5 +29,20 @@ export class FileTreeService {
       .findByIdAndRemove({ _id: id })
       .exec();
     return deletedFileTree;
+  }
+
+  async update(id: string, updateFileTreeDTO: UpdateFileTreeDTO) {
+    const path = `fileSystemTree.${updateFileTreeDTO.fileLocation}`;
+    const updatedFileTree = await this.fileTree
+      .findByIdAndUpdate(
+        { _id: id },
+        {
+          $set: {
+            [path]: updateFileTreeDTO.code,
+          },
+        },
+      )
+      .exec();
+    return updatedFileTree;
   }
 }

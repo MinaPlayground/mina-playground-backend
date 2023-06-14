@@ -9,7 +9,7 @@ export class FileTree {
   @Prop({ type: Map })
   fileSystemTree: FileSystemTree;
 
-  @Prop({ type: SchemaTypes.ObjectId })
+  @Prop({ type: SchemaTypes.ObjectId, unique: true })
   project_id: Types.ObjectId;
 }
 
