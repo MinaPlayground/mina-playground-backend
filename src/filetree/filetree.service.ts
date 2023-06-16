@@ -2,8 +2,8 @@ import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { FileTree } from './schemas/filetree.schema';
-import { CreateFileTreeDTO } from './dto/create-filetree.dto';
 import { UpdateFileTreeDTO } from './dto/update-filetree.dto';
+import { CreateFileTreeDTO } from './dto/create-filetree.dto';
 
 @Injectable()
 export class FileTreeService {
@@ -14,10 +14,6 @@ export class FileTreeService {
   async create(createFileTreeDTO: CreateFileTreeDTO): Promise<FileTree> {
     const createdFileTree = await this.fileTree.create(createFileTreeDTO);
     return createdFileTree;
-  }
-
-  async findAll(): Promise<FileTree[]> {
-    return this.fileTree.find().exec();
   }
 
   async findOne(id: string): Promise<FileTree> {
