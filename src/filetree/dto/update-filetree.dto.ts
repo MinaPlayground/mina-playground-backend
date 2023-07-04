@@ -1,13 +1,18 @@
-import { IsNotEmpty, IsString, MaxLength } from 'class-validator';
+import { IsNotEmpty, IsOptional, IsString, MaxLength } from 'class-validator';
 
 export class UpdateFileTreeDTO {
   @IsString()
   @IsNotEmpty()
   @MaxLength(512)
-  fileLocation: string;
+  location: string;
 
   @IsString()
-  @IsNotEmpty()
+  @IsOptional()
+  @MaxLength(512)
+  rename: string;
+
+  @IsString()
+  @IsOptional()
   @MaxLength(10000)
-  readonly code: string;
+  code = '';
 }
