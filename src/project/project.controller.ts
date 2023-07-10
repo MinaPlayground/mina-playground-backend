@@ -19,6 +19,7 @@ export class ProjectController {
       project_id: item._id,
       fileSystemTree: zkAppTemplate,
     });
+    return { project_id: item._id };
   }
 
   @Get()

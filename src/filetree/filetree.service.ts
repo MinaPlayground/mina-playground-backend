@@ -4,6 +4,7 @@ import { Model } from 'mongoose';
 import { FileTree } from './schemas/filetree.schema';
 import { UpdateFileTreeDTO } from './dto/update-filetree.dto';
 import { CreateFileTreeDTO } from './dto/create-filetree.dto';
+import { DeleteFileTreeItemDTO } from './dto/delete-filetree-item.dto';
 
 @Injectable()
 export class FileTreeService {
@@ -20,11 +21,18 @@ export class FileTreeService {
     return this.fileTree.findOne({ project_id: id }).exec();
   }
 
-  async delete(id: string) {
-    const deletedFileTree = await this.fileTree
-      .findByIdAndRemove({ _id: id })
+  async delete(id: string, deleteFileTreeItemDTO: DeleteFileTreeItemDTO) {
+    return await this.fileTree
+      .findByIdAndUpdate(
+        { _id: id },
+        {
+          $unset: {
+            [`fileSystemTree.${deleteFileTreeItemDTO.location}`]: '',
+          },
+        },
+        {},
+      )
       .exec();
-    return deletedFileTree;
   }
 
   async update(id: string, updateFileTreeDTO: UpdateFileTreeDTO) {
