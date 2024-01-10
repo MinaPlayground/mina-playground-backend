@@ -3,6 +3,7 @@ import { MongooseModule } from '@nestjs/mongoose';
 import { FileTreeModule } from './filetree/filetree.module';
 import { ProjectModule } from './project/project.module';
 import { ConfigModule } from '@nestjs/config';
+import { VersionControlModule } from './version-control/version-control.module';
 
 @Module({
   imports: [
@@ -12,6 +13,7 @@ import { ConfigModule } from '@nestjs/config';
     ),
     FileTreeModule,
     ProjectModule,
+    VersionControlModule,
   ],
 })
 export class AppModule {}

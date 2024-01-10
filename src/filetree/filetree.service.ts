@@ -30,38 +30,51 @@ export class FileTreeService {
             [`fileSystemTree.${deleteFileTreeItemDTO.location}`]: '',
           },
         },
-        {},
+        { new: true },
       )
       .exec();
   }
 
   async update(id: string, updateFileTreeDTO: UpdateFileTreeDTO) {
-    const { location, code, rename } = updateFileTreeDTO;
+    const { location, code, rename, locations } = updateFileTreeDTO;
     const path = `fileSystemTree.${location}`;
-    const isDirectory = location.endsWith('.directory');
-    if (rename) {
+    // const isDirectory = location.endsWith('.directory');
+    // if (rename) {
+    //   return await this.fileTree
+    //     .findByIdAndUpdate(
+    //       { _id: id },
+    //       {
+    //         $rename: {
+    //           [path]: `fileSystemTree.${rename}`,
+    //         },
+    //       },
+    //       { new: true },
+    //     )
+    //     .exec();
+    // }
+
+    if (locations) {
       return await this.fileTree
         .findByIdAndUpdate(
           { _id: id },
           {
-            $rename: {
-              [path]: `fileSystemTree.${rename}`,
-            },
+            $set: locations,
           },
-          {},
+          { new: true },
         )
         .exec();
     }
 
-    return await this.fileTree
-      .findByIdAndUpdate(
-        { _id: id },
-        {
-          $set: {
-            [path]: isDirectory ? {} : code,
-          },
-        },
-      )
-      .exec();
+    // return await this.fileTree
+    //   .findByIdAndUpdate(
+    //     { _id: id },
+    //     {
+    //       $set: {
+    //         [path]: isDirectory ? {} : code,
+    //       },
+    //     },
+    //     { new: true },
+    //   )
+    //   .exec();
   }
 }
