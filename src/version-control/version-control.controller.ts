@@ -9,6 +9,7 @@ import {
 } from '@nestjs/common';
 import { VersionControlService } from './version-control.service';
 import { CreateCommitDTO } from './dto/create-commit.dto';
+import { VersionControl } from './schemas/version-control.schema';
 
 @Controller('versionControl')
 export class VersionControlController {
@@ -26,11 +27,19 @@ export class VersionControlController {
     // return { project_id: item._id };
   }
 
-  // @Get(':id')
-  // async findOne(@Param('id') id: string): Promise<FileTree> {
-  //   return this.fileTreeService.findOne(id);
-  // }
-  //
+  @Get(':id')
+  async findOne(@Param('id') id: string): Promise<VersionControl[]> {
+    return this.versionControlService.findOne(id);
+  }
+
+  @Get('/commit/:commitId')
+  async findCommit(
+    @Param('id') id: string,
+    @Param('commitId') commitId: string,
+  ): Promise<VersionControl[]> {
+    return this.versionControlService.findCommit(id, commitId);
+  }
+
   // @Delete(':id')
   // async delete(
   //   @Param('id') id: string,

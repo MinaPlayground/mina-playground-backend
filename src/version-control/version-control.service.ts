@@ -16,10 +16,14 @@ export class VersionControlService {
     return await this.versionControl.create(createCommitDTO);
   }
 
-  // async findOne(id: string): Promise<FileTree> {
-  //   return this.fileTree.findOne({ project_id: id }).exec();
-  // }
-  //
+  async findOne(id: string): Promise<VersionControl[]> {
+    return this.versionControl.find({ project_id: id }).exec();
+  }
+
+  async findCommit(id: string, commitId): Promise<VersionControl[]> {
+    return this.versionControl.find({ _id: commitId }).exec();
+  }
+
   // async delete(id: string, deleteFileTreeItemDTO: DeleteFileTreeItemDTO) {
   //   return await this.fileTree
   //     .findByIdAndUpdate(

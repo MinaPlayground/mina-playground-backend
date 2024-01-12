@@ -1,11 +1,11 @@
-import { IsString } from 'class-validator';
+import { IsObject, IsString } from 'class-validator';
 
 export class CreateCommitDTO {
-  @IsString()
-  previousCode: string;
+  @IsObject()
+  files: string;
 
   @IsString()
-  currentCode: string;
+  message: string;
 
   @IsString()
   project_id: string;

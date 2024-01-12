@@ -2,13 +2,13 @@ import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { SchemaTypes } from 'mongoose';
 import { Project } from '../../project/schemas/project.schema';
 
-@Schema({ minimize: false })
+@Schema({ minimize: false, timestamps: true })
 export class VersionControl {
-  @Prop()
-  previousCode: string;
+  @Prop({ type: Map })
+  files: object;
 
   @Prop()
-  currentCode: string;
+  message: string;
 
   @Prop({ type: SchemaTypes.ObjectId, ref: 'Project' })
   project_id: Project;
