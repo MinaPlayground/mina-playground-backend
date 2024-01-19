@@ -3,6 +3,8 @@ import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { Project, ProjectDocument } from './schemas/project.schema';
 import { CreateProjectDTO } from './dto/create-project.dto';
+import { UpdateFileTreeDTO } from '../filetree/dto/update-filetree.dto';
+import { UpdateProjectDTO } from './dto/update-project.dto';
 
 @Injectable()
 export class ProjectService {
@@ -28,5 +30,22 @@ export class ProjectService {
       .findByIdAndRemove({ _id: id })
       .exec();
     return deletedProject;
+  }
+
+  async update(id: string, updateProjectDTO: UpdateProjectDTO) {
+    const { name, visibility } = updateProjectDTO;
+
+    return await this.project
+      .findByIdAndUpdate(
+        { _id: id },
+        {
+          $set: {
+            name,
+            visibility,
+          },
+        },
+        { new: true },
+      )
+      .exec();
   }
 }

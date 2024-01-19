@@ -2,11 +2,14 @@ import {
   IsBoolean,
   IsInt,
   IsNotEmpty,
+  IsObject,
+  IsOptional,
   IsString,
   Max,
   MaxLength,
   Min,
 } from 'class-validator';
+import { FileSystemTree } from '../../../types';
 
 export class CreateProjectDTO {
   @IsString()
@@ -18,6 +21,10 @@ export class CreateProjectDTO {
   @Min(0)
   @Max(1)
   readonly type: number;
+
+  @IsObject()
+  @IsOptional()
+  readonly fileSystemTree: FileSystemTree;
 
   @IsBoolean()
   readonly visibility: boolean;
