@@ -1,8 +1,14 @@
-import { IsNotEmpty, IsOptional, IsString, MaxLength } from 'class-validator';
+import {
+  IsNotEmpty,
+  IsObject,
+  IsOptional,
+  IsString,
+  MaxLength,
+} from 'class-validator';
 
 export class UpdateFileTreeDTO {
   @IsString()
-  @IsNotEmpty()
+  @IsOptional()
   @MaxLength(512)
   location: string;
 
@@ -10,6 +16,10 @@ export class UpdateFileTreeDTO {
   @IsOptional()
   @MaxLength(512)
   rename: string;
+
+  @IsObject()
+  @IsOptional()
+  locations: object;
 
   @IsString()
   @IsOptional()
