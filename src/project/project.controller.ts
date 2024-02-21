@@ -11,8 +11,6 @@ import { Project } from './schemas/project.schema';
 import { CreateProjectDTO } from './dto/create-project.dto';
 import { ProjectService } from './project.service';
 import { FileTreeService } from '../filetree/filetree.service';
-import { zkAppTemplate, zkAppTemplate2 } from '../templates/zkApp';
-import { UpdateFileTreeDTO } from '../filetree/dto/update-filetree.dto';
 import { UpdateProjectDTO } from './dto/update-project.dto';
 import { smartContractTemplate } from '../templates/smartContract';
 

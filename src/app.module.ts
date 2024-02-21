@@ -4,6 +4,7 @@ import { FileTreeModule } from './filetree/filetree.module';
 import { ProjectModule } from './project/project.module';
 import { ConfigModule } from '@nestjs/config';
 import { VersionControlModule } from './version-control/version-control.module';
+import { SnippetModule } from './snippet/snippet.module';
 
 @Module({
   imports: [
@@ -14,6 +15,7 @@ import { VersionControlModule } from './version-control/version-control.module';
     FileTreeModule,
     ProjectModule,
     VersionControlModule,
+    SnippetModule,
   ],
 })
 export class AppModule {}
