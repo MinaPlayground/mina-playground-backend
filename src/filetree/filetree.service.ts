@@ -38,20 +38,20 @@ export class FileTreeService {
   async update(id: string, updateFileTreeDTO: UpdateFileTreeDTO) {
     const { location, code, rename, locations } = updateFileTreeDTO;
     const path = `fileSystemTree.${location}`;
-    // const isDirectory = location.endsWith('.directory');
-    // if (rename) {
-    //   return await this.fileTree
-    //     .findByIdAndUpdate(
-    //       { _id: id },
-    //       {
-    //         $rename: {
-    //           [path]: `fileSystemTree.${rename}`,
-    //         },
-    //       },
-    //       { new: true },
-    //     )
-    //     .exec();
-    // }
+    const isDirectory = location.endsWith('.directory');
+    if (rename) {
+      return await this.fileTree
+        .findByIdAndUpdate(
+          { _id: id },
+          {
+            $rename: {
+              [path]: `fileSystemTree.${rename}`,
+            },
+          },
+          { new: true },
+        )
+        .exec();
+    }
 
     if (locations) {
       return await this.fileTree
@@ -65,16 +65,16 @@ export class FileTreeService {
         .exec();
     }
 
-    // return await this.fileTree
-    //   .findByIdAndUpdate(
-    //     { _id: id },
-    //     {
-    //       $set: {
-    //         [path]: isDirectory ? {} : code,
-    //       },
-    //     },
-    //     { new: true },
-    //   )
-    //   .exec();
+    return await this.fileTree
+      .findByIdAndUpdate(
+        { _id: id },
+        {
+          $set: {
+            [path]: isDirectory ? {} : code,
+          },
+        },
+        { new: true },
+      )
+      .exec();
   }
 }
