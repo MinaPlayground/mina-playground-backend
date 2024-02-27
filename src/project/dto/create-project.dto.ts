@@ -26,6 +26,10 @@ export class CreateProjectDTO {
   @IsOptional()
   readonly fileSystemTree: FileSystemTree;
 
+  @IsString()
+  @IsOptional()
+  readonly forkedProject: string;
+
   @IsBoolean()
   readonly visibility: boolean;
 

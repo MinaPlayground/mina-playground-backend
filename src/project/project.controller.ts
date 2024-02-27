@@ -13,6 +13,7 @@ import { ProjectService } from './project.service';
 import { FileTreeService } from '../filetree/filetree.service';
 import { UpdateProjectDTO } from './dto/update-project.dto';
 import { smartContractTemplate } from '../templates/smartContract';
+import { zkAppTemplate2 } from '../templates/zkApp';
 
 @Controller('project')
 export class ProjectController {
@@ -24,10 +25,20 @@ export class ProjectController {
   @Post()
   async create(@Body() createProjectDTO: CreateProjectDTO) {
     const item = await this.projectService.create(createProjectDTO);
-    const fileSystemTree = createProjectDTO.fileSystemTree;
+    const forkedProject = createProjectDTO.forkedProject;
+
+    if (forkedProject) {
+      const fileSystemTree = await this.fileTreeService.findOne(forkedProject);
+      await this.fileTreeService.create({
+        project_id: item._id,
+        fileSystemTree: fileSystemTree.fileSystemTree,
+      });
+      return { project_id: item._id };
+    }
+
     await this.fileTreeService.create({
       project_id: item._id,
-      fileSystemTree: fileSystemTree ? fileSystemTree : smartContractTemplate,
+      fileSystemTree: zkAppTemplate2,
     });
     return { project_id: item._id };
   }
