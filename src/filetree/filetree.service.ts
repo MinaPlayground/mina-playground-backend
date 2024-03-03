@@ -38,7 +38,6 @@ export class FileTreeService {
   async update(id: string, updateFileTreeDTO: UpdateFileTreeDTO) {
     const { location, code, rename, locations } = updateFileTreeDTO;
     const path = `fileSystemTree.${location}`;
-    const isDirectory = location.endsWith('.directory');
     if (rename) {
       return await this.fileTree
         .findByIdAndUpdate(
@@ -64,7 +63,7 @@ export class FileTreeService {
         )
         .exec();
     }
-
+    const isDirectory = location.endsWith('.directory');
     return await this.fileTree
       .findByIdAndUpdate(
         { _id: id },
