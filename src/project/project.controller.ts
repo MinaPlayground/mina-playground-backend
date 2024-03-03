@@ -13,7 +13,6 @@ import { ProjectService } from './project.service';
 import { FileTreeService } from '../filetree/filetree.service';
 import { UpdateProjectDTO } from './dto/update-project.dto';
 import { smartContractTemplate } from '../templates/smartContract';
-import { zkAppTemplate2 } from '../templates/zkApp';
 
 @Controller('project')
 export class ProjectController {
@@ -38,15 +37,15 @@ export class ProjectController {
 
     await this.fileTreeService.create({
       project_id: item._id,
-      fileSystemTree: zkAppTemplate2,
+      fileSystemTree: smartContractTemplate,
     });
     return { project_id: item._id };
   }
 
-  @Get()
-  async findAll(): Promise<Project[]> {
-    return this.projectService.findAll();
-  }
+  // @Get()
+  // async findAll(): Promise<Project[]> {
+  //   return this.projectService.findAll();
+  // }
 
   @Get(':id')
   async findOne(@Param('id') id: string): Promise<Project> {
